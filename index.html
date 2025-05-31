@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konverter.ai - Voice Assistant (Dialogflow CX)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <h1>Konverter.ai</h1>
+                        <span class="tagline">Voice Assistant</span>
+                    </div>
+                    <div class="agent-info">
+                        <span class="agent-badge">Dialogflow CX</span>
+                        <div class="connection-status" id="connection-status">
+                            <span class="status-dot disconnected"></span>
+                            <span class="status-text">Connecting...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Interface -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Voice Control Panel -->
+                <div class="voice-panel">
+                    <div class="voice-controls">
+                        <button id="talk-button" class="talk-btn" disabled>
+                            <div class="talk-btn-content">
+                                <div class="mic-icon">🎤</div>
+                                <span class="talk-text">Start Conversation</span>
+                            </div>
+                        </button>
+                        
+                        <div class="voice-status" id="voice-status">
+                            <div class="status-indicator"></div>
+                            <span class="status-message">Ready to start conversation</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Audio Visualization -->
+                    <div class="audio-visualizer" id="audio-visualizer">
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                    </div>
+                </div>
+
+                <!-- Conversation Display -->
+                <div class="conversation-panel">
+                    <div class="conversation-header">
+                        <h2>Conversation</h2>
+                        <button id="clear-conversation" class="clear-btn">Clear</button>
+                    </div>
+                    
+                    <div class="conversation-container" id="conversation-container">
+                        <div class="welcome-message">
+                            <div class="message-content">
+                                <h3>👋 Welcome to Konverter.ai Voice Assistant!</h3>
+                                <p>Click "Start Conversation" to begin.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Input Alternative -->
+                <div class="text-input-panel">
+                    <div class="text-input-container">
+                        <input 
+                            type="text" 
+                            id="text-input" 
+                            placeholder="Or type your message here..." 
+                            disabled
+                        >
+                        <button id="send-text" class="send-btn" disabled>Send</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p>&copy; 2025 Konverter.ai - Democratizing AI Agents</p>
+                    <div class="tech-info">
+                        <span>Powered by Dialogflow CX & Gemini Live API</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Initializing voice assistant...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="advanced_audio_recorder.js"></script>
+    <script src="pcm_stream_player.js"></script>
+    <script src="ui_controller.js"></script>
+    <script src="dialogflow_client.js"></script>
+    
+    <script>
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 Dialogflow Voice Chat App Starting...');
+            
+            // Initialize components
+            window.uiController = new UIController();
+            window.dialogflowClient = new DialogflowClient();
+            
+            // Start the application
+            window.dialogflowClient.initialize()
+                .then(() => {
+                    console.log('✅ Application initialized successfully');
+                    document.getElementById('loading-overlay').style.display = 'none';
+                })
+                .catch((error) => {
+                    console.error('❌ Application initialization failed:', error);
+                    document.getElementById('loading-overlay').innerHTML = `
+                        <div class="loading-content">
+                            <div class="error-icon">❌</div>
+                            <p>Failed to initialize voice assistant</p>
+                            <button onclick="location.reload()">Retry</button>
+                        </div>
+                    `;
+                });
+        });
+    </script>
+</body>
+</html>
