@@ -521,7 +521,15 @@ class DialogflowClient {
             <div class="welcome-message">
                 <div class="message-content">
                     <h3>👋 Welcome to Konverter.ai Voice Assistant!</h3>
-                    <p>Click "Start Conversation" to begin.</p>
+                    <p>I can help you with:</p>
+                    <ul>
+                        <li>📅 Checking and scheduling calendar appointments</li>
+                        <li>📊 Reading and updating Google Sheets</li>
+                        <li>📄 Accessing Google Docs content</li>
+                        <li>🔍 Searching Google Drive files</li>
+                        <li>📋 Reading PDF documents</li>
+                    </ul>
+                    <p>Click <strong>Start Conversation</strong> to begin talking!</p>
                 </div>
             </div>
         `;
